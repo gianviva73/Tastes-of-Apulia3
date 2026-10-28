@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapori di Puglia | Digital Creator Lab</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d4a3e; /* Verde Oliva profondo */
+            --primary-light: #416d5b;
+            --accent: #c86d3b; /* Terracotta calda */
+            --bg-color: #fcfbfa; /* Pergamena chiara */
+            --card-bg: #ffffff;
+            --text-main: #2b2b2b;
+            --text-muted: #666666;
+            --border-color: #e2ded8;
+            --shadow: 0 10px 25px -5px rgba(45, 74, 62, 0.08), 0 8px 10px -6px rgba(45, 74, 62, 0.04);
+            --radius: 16px;
+            --base-font-size: 16px;
+        }
+
+        html {
+            font-size: var(--base-font-size);
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 90px;
+            transition: font-size 0.2s ease;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2c24 100%);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge-brand {
+            display: inline-block;
+            background: rgba(200, 109, 59, 0.2);
+            color: #f3a47d;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            border: 1px solid rgba(200, 109, 59, 0.3);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: #d1d8d4;
+            font-size: 1.05rem;
+        }
+
+        .header-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .lang-select option {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-top-action {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-top-action:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .search-bar-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .kitchen-tools-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .tool-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .timer-display {
+            font-family: monospace;
+            font-size: 1.2rem;
+            background: #f7f5f0;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-weight: bold;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-light);
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(45, 74, 62, 0.2);
+        }
+
+        .results-counter {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .recipe-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(45, 74, 62, 0.15);
+        }
+
+        .recipe-header {
+            padding: 1.5rem;
+            background: #f7f5f0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .recipe-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .recipe-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(200, 109, 59, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .recipe-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .portion-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f8f6;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .portion-btns {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .p-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .p-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .ingredients-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredients-list li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ingredients-list li span:last-child {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .steps-box {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .wine-pairing {
+            background: rgba(45, 74, 62, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-card-action {
+            background: #f1ede4;
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-card-action:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .floating-widgets {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .zoom-widget, .btn-back-top {
+            background: var(--primary);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .zoom-btn:hover { background: rgba(255, 255, 255, 0.4); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal h2 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem; }
+        .modal p, .modal ul { color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem; }
+        .modal ul { margin-left: 20px; }
+        .modal li { margin-bottom: 8px; }
+
+        .btn-close {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 2rem 1rem;
+        }
+
+        footer span { color: var(--accent); font-weight: 600; }
+
+        @media(max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .header-actions { position: static; margin-top: 15px; justify-content: center; flex-wrap: wrap; }
+            header { padding: 1.5rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="topHeader">
+        <div class="header-actions">
+            <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="cn">🇨🇳 中文</option>
+            </select>
+            <button type="button" class="btn-top-action" onclick="toggleModal(true)" id="lblGuideBtn">📖 Guida</button>
+        </div>
+        <div class="header-content">
+            <span class="badge-brand">Digital Creator Lab</span>
+            <h1 id="lblTitle" data-i18n="lblTitle">Sapori di Puglia</h1>
+            <p id="lblSubtitle" data-i18n="lblSubtitle">Un viaggio digitale tra i profumi, i sapori e la tradizione della nostra terra.</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="search-bar-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca ricetta o ingrediente (es. orecchiette, pasticciotto...)" onkeyup="searchRecipes()">
+        </div>
+
+        <div class="kitchen-tools-bar">
+            <div class="tool-group">
+                <span class="tool-title" id="lblTimerTitle" data-i18n="lblTimerTitle">⏱️ Timer Cottura:</span>
+                <span id="timerDisplay" class="timer-display">10:00</span>
+                <button type="button" class="btn-action" onclick="startTimer()" id="lblStart" data-i18n="lblStart">Avvia</button>
+                <button type="button" class="btn-action" onclick="resetTimer()" style="background:#888;" id="lblReset" data-i18n="lblReset">Reset</button>
+            </div>
+            <div class="tool-group">
+                <span class="tool-title" id="lblScreenTitle" data-i18n="lblScreenTitle">💡 Schermo:</span>
+                <button type="button" class="btn-action" onclick="toggleWakeLock()" id="lblWakeLock" data-i18n="lblWakeLock">Tieni Acceso</button>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button type="button" class="filter-btn active" onclick="filterRecipes('all', this)" id="lblFilterAll" data-i18n="lblFilterAll">Tutte</button>
+            <button type="button" class="filter-btn" onclick="filterRecipes('primi', this)" id="lblFilterPrimi" data-i18n="lblFilterPrimi">Primi Piatti (21)</button>
+            <button type="button" class="filter-btn" onclick="filterRecipes('piatti-unici', this)" id="lblFilterRustici" data-i18n="lblFilterRustici">Rustici & Piatti Unici (11)</button>
+            <button type="button" class="filter-btn" onclick="filterRecipes('dolci', this)" id="lblFilterDolci" data-i18n="lblFilterDolci">Dolci Tradizionali (10)</button>
+        </div>
+
+        <div class="results-counter" id="resultsCounter" data-i18n="lblCounterText">Visualizzazione di 42 ricette tradizionali</div>
+
+        <div class="recipes-grid" id="recipesGrid">
+
+            <!-- PRIMI PIATTI (21) -->
+            <div class="recipe-card" data-category="primi" data-keywords="orecchiette cime rapa pasta">
+                <div class="recipe-header"><div><h2 class="recipe-title">Orecchiette con le Cime di Rapa</h2><div class="recipe-meta"><span>⏱️ 30 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Orecchiette fresche</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Cime di rapa pulite</span> <span><strong data-base="1.2">1.2</strong> kg</span></li>
+                            <li><span>Acciughe sott'olio</span> <span><strong data-base="4">4</strong> filetti</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Lessare le cime di rapa in acqua salata, poi unire le orecchiette. Soffriggere aglio, olio, acciughe e peperoncino, quindi saltare la pasta al dente con le rape.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Gravina DOC o Rosato di Salice Salentino.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="spaghetti cozze tarantina pesce">
+                <div class="recipe-header"><div><h2 class="recipe-title">Spaghetti alle Cozze alla Tarantina</h2><div class="recipe-meta"><span>⏱️ 25 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Spaghetti</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Cozze nere tarantine</span> <span><strong data-base="1.5">1.5</strong> kg</span></li>
+                            <li><span>Pomodori pelati</span> <span><strong data-base="400">400</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Aprire le cozze in padella con aglio e olio. Sgusciarne metà, unire i pelati spezzettati, cuocere il sughetto e saltare gli spaghetti al dente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Lizzano DOC Rosato.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="sagne ncannulate ricotta forte salento pasta">
+                <div class="recipe-header"><div><h2 class="recipe-title">Sagne 'ncannulate con Ricotta Forte</h2><div class="recipe-meta"><span>⏱️ 35 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Sagne 'ncannulate fresche</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Passata di pomodoro</span> <span><strong data-base="700">700</strong> g</span></li>
+                            <li><span>Ricotta forte salentina</span> <span><strong data-base="100">100</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Preparare un sughetto semplice di pomodoro con basilico. Lessare le sagne, condirle con il sugo e mantecare generosamente con la tipica ricotta forte.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Negroamaro del Salento DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="cavatielli cavatelli frutti mare pesce">
+                <div class="recipe-header"><div><h2 class="recipe-title">Cavatielli con i Frutti di Mare</h2><div class="recipe-meta"><span>⏱️ 30 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Cavatelli freschi</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Misto cozze, vongole e scorfano</span> <span><strong data-base="600">600</strong> g</span></li>
+                            <li><span>Pomodorini ciliegino</span> <span><strong data-base="300">300</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Soffriggere aglio e olio, aggiungere i frutti di mare, sfumare con vino bianco e unire i pomodorini. Saltare i cavatelli scolati al dente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Fiano Minutolo.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="ciceri triria pasta ceci salento zuppa">
+                <div class="recipe-header"><div><h2 class="recipe-title">Ciceri e Triria (Pasta e Ceci Salentina)</h2><div class="recipe-meta"><span>⏱️ 50 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Ceci lessati</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Pasta mista / Triria</span> <span><strong data-base="350">350</strong> g</span></li>
+                            <li><span>Rosmarino e cipolla</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Cuocere i ceci con cipolla, olio e rosmarino. Lessare la pasta nella stessa acqua dei ceci. Una parte di pasta viene tradizionalmente fritta e aggiunta croccante.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Primitivo di Manduria giovane.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="orecchiette braciole sugo carne domenica">
+                <div class="recipe-header"><div><h2 class="recipe-title">Orecchiette al Sugo di Braciole</h2><div class="recipe-meta"><span>⏱️ 120 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Orecchiette</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Braciole di vitello arrotolate</span> <span><strong data-base="4">4</strong></span></li>
+                            <li><span>Passata di pomodoro</span> <span><strong data-base="1">1</strong> lt</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Rosolare le braciole farcite con aglio, prezzemolo e pecorino. Sfumare con vino rosso, unire il pomodoro e cuocere a fuoco lento per 2 ore. Condire la pasta.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Salice Salentino Riserva.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="spaghetti assassina bari croccanti piccanti">
+                <div class="recipe-header"><div><h2 class="recipe-title">Spaghetti all'Assassina (Bari)</h2><div class="recipe-meta"><span>⏱️ 25 min</span><span>🔥 Difficile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Spaghetti</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Passata di pomodoro</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Concentrato di pomodoro</span> <span><strong data-base="2">2</strong> cucchiai</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Cottura risottata in padella di ferro con brodo di pomodoro aggiunto poco alla volta, facendo bruciacchiare la pasta per ottenere la tipica croccantezza.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Nero di Troia DOCG.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="vermicelli san giuannidda acciughe capperi pomodoro">
+                <div class="recipe-header"><div><h2 class="recipe-title">Vermicelli alla San Giuannidda</h2><div class="recipe-meta"><span>⏱️ 20 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Vermicelli o Spaghetti</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Pomodorini freschi</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Acciughe sott'olio</span> <span><strong data-base="6">6</strong> filetti</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Soffriggere aglio e acciughe fino a scioglierle. Aggiungere capperi, olive nere e pomodorini freschi a pezzi. Saltare la pasta scolata al dente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Locorotondo DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="orecchiette crudo rucola pomodorino fresco">
+                <div class="recipe-header"><div><h2 class="recipe-title">Orecchiette Crudo, Rucola e Pomodorino</h2><div class="recipe-meta"><span>⏱️ 15 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Orecchiette fresche</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Prosciutto crudo a listarelle</span> <span><strong data-base="150">150</strong> g</span></li>
+                            <li><span>Rucola fresca</span> <span><strong data-base="100">100</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Saltare le orecchiette con olio e crudo. Fuori dal fuoco, unire rucola fresca, pomodorini a tocchetti e scaglie di formaggio.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Brindisi Rosato DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="fave cicorie puré contadino pugliese">
+                <div class="recipe-header"><div><h2 class="recipe-title">Fave e Cicorie</h2><div class="recipe-meta"><span>⏱️ 90 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Fave secche decorticate</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Cicorie selvatiche di campagna</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Patata</span> <span><strong data-base="1">1</strong></span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Cuocere le fave a fuoco lento con una patata fino a ridurle in purè. Lessare le cicorie e servirle unite al purè con abbondante olio evo.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Aleatico di Puglia secco.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="spaghetti vongole veraci pesce mare">
+                <div class="recipe-header"><div><h2 class="recipe-title">Spaghetti alle Vongole Veraci</h2><div class="recipe-meta"><span>⏱️ 20 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Spaghetti di semola</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Vongole veraci spurgate</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Aglio, Olio evo e Prezzemolo</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Soffriggere aglio e olio, unire le vongole e coprire fino a farle aprire. Sfumare con poco vino bianco, aggiungere prezzemolo tritato e saltare gli spaghetti scolati al dente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Chardonnay o Bianco d'Alessano.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="orecchiette pomodoro finto ricotta schianta">
+                <div class="recipe-header"><div><h2 class="recipe-title">Orecchiette al Pomodoro "Finto" e Ricotta</h2><div class="recipe-meta"><span>⏱️ 20 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Orecchiette fresche</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Pomodorini da serbo maturi</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Ricotta fresca di pecora o mucca</span> <span><strong data-base="150">150</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Il "finto pomodoro" si fa saltando rapidamente i pomodorini schiacciati con aglio e olio, senza farli cuocere troppo. Condire la pasta e aggiungere cucchiaiate di ricotta fresca fredda sopra.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Locorotondo DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="cavatelli cozze fagioli terra mare">
+                <div class="recipe-header"><div><h2 class="recipe-title">Cavatelli con Cozze e Fagioli</h2><div class="recipe-meta"><span>⏱️ 40 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Cavatelli freschi</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Cozze fresche</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Fagioli borlotti lessati</span> <span><strong data-base="300">300</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Aprire le cozze e filtrare l'acqua. In una padella insaporire i fagioli con olio e aglio, unire l'acqua delle cozze e una parte di fagioli frullati per creare cremosità. Saltare i cavatelli con le cozze.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Rosato pugliese frizzante.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="lagane ceci zuppa pasta fresca murgia">
+                <div class="recipe-header"><div><h2 class="recipe-title">Lagane e Ceci</h2><div class="recipe-meta"><span>⏱️ 45 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Lagane fresche (pasta larga)</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Ceci lessati</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Olio, aglio e peperoncino</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Le lagane sono una delle paste più antiche d'Italia (antenate delle lasagne). Cuocere i ceci con aglio e olio evo, unire la pasta fresca e mantecare con un filo d'olio a crudo.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Rosso Barletta.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="troccoli seppie piene foggia pesce">
+                <div class="recipe-header"><div><h2 class="recipe-title">Troccoli con Sugo di Seppie Piene</h2><div class="recipe-meta"><span>⏱️ 60 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Troccoli freschi (pasta foggiana)</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Seppie medie con i loro tentacoli</span> <span><strong data-base="4">4</strong></span></li>
+                            <li><span>Passata di pomodoro</span> <span><strong data-base="600">600</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Farcire le seppie con un trito dei loro tentacoli, pangrattato, aglio e prezzemolo, chiudendole con uno stecchino. Cuocerle a lungo nella passata di pomodoro e condire i troccoli.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Nero di Troia Rosato.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="pesto rucola mandorle pomodorini secchi orecchiette">
+                <div class="recipe-header"><div><h2 class="recipe-title">Orecchiette al Pesto Pugliese</h2><div class="recipe-meta"><span>⏱️ 15 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Orecchiette fresche</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Rucola fresca</span> <span><strong data-base="150">150</strong> g</span></li>
+                            <li><span>Mandorle pelate</span> <span><strong data-base="80">80</strong> g</span></li>
+                            <li><span>Pomodorini secchi</span> <span><strong data-base="60">60</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Frullare la rucola con le mandorle, olio evo, pecorino e un pizzico di sale per fare il pesto a freddo. Condire la pasta scolata e guarnire con pezzetti di pomodorini secchi.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Fiano o Verdeca.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="spaghetti aglio olio peperoncino mollica fritta">
+                <div class="recipe-header"><div><h2 class="recipe-title">Spaghetti con la "Muddica Atturrata"</h2><div class="recipe-meta"><span>⏱️ 15 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Spaghetti</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Mollica di pane raffermo grattugiata</span> <span><strong data-base="100">100</strong> g</span></li>
+                            <li><span>Acciughe e aglio</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Tostare la mollica di pane in padella con un filo d'olio e un pizzico di sale fino a renderla dorata e croccante (il formaggio dei poveri). Condire gli spaghetti aglio, olio e acciughe spolverando sopra la mollica.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Bianco leggero pugliese.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="paccheri crema fave gamberi rossi">
+                <div class="recipe-header"><div><h2 class="recipe-title">Paccheri con Crema di Fave e Gamberi</h2><div class="recipe-meta"><span>⏱️ 30 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Paccheri di semola</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Purè di fave fresche o surgelate</span> <span><strong data-base="300">300</strong> g</span></li>
+                            <li><span>Gamberi rossi freschi sgusciati</span> <span><strong data-base="300">300</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Scottare i gamberi con un filo d'olio e brandy. Sciogliere il purè di fave con acqua di cottura della pasta per creare una crema vellutata. Saltare i paccheri e guarnire con i gamberi rossi crudi marinati.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Bombino Bianco o Fiano.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="primi" data-keywords="vermicelli sangiovannese salsiccia peperoni">
+                <div class="recipe-header"><div><h2 class="recipe-title">Vermicelli alla Sangiovannese</h2><div class="recipe-meta"><span>⏱️ 35 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Primi</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Vermicelli</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Salsiccia fresca di maiale sbriciolata</span> <span><strong data-base="300">300</strong> g</span></li>
+                            <li><span>Peperoni verdi di friggere</span> <span><strong data-base="3">3</strong></span></li>
+                            <li><span>Pomodorini</span> <span><strong data-base="250">250</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Soffriggere i peperoni verdi a tocchetti con la salsiccia sbriciolata. Unire i pomodorini e cuocere il sugo ricco. Condire i vermicelli al dente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> San Severo Rosso DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- RUSTICI E PIATTI UNICI (11) -->
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="tiella barese riso patate cozze">
+                <div class="recipe-header"><div><h2 class="recipe-title">Tiella Barese (Riso, Patate e Cozze)</h2><div class="recipe-meta"><span>⏱️ 60 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Riso</span> <span><strong data-base="320">320</strong> g</span></li>
+                            <li><span>Cozze fresche</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Patate medie</span> <span><strong data-base="4">4</strong></span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Disporre in teglia strati crudi di cipolla, pomodorini, patate, cozze e riso. Bagnare con l'acqua filtrata delle cozze e infornare a 200°C per 45 minuti.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Verdeca di Gravina fresco.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="focaccia barese pomodorini soffice street food">
+                <div class="recipe-header"><div><h2 class="recipe-title">Focaccia Barese</h2><div class="recipe-meta"><span>⏱️ 180 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Semola rimacinata</span> <span><strong data-base="300">300</strong> g</span></li>
+                            <li><span>Farina 00</span> <span><strong data-base="200">200</strong> g</span></li>
+                            <li><span>Patata lessa</span> <span><strong data-base="1">1</strong></span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare le farine con la patata, lievito e acqua. Lievitare in teglia, affondare pomodorini e olive, condire con sale e olio ed infornare ad alta temperatura.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Birra artigianale o rosato.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="pasticcio leccese pasta frolla ragu salento">
+                <div class="recipe-header"><div><h2 class="recipe-title">Pasticcio Leccese</h2><div class="recipe-meta"><span>⏱️ 90 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Pasta frolla salata</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Besciamella densa</span> <span><strong data-base="400">400</strong> ml</span></li>
+                            <li><span>Ragù di carne</span> <span><strong data-base="300">300</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Foderare una teglia con frolla, riempire con ragù, besciamella e piselli. Coprire con disco di frolla, spennellare con uovo e infornare a 180°C.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Salice Salentino.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="bombette martina franca involtini carne caciocavallo">
+                <div class="recipe-header"><div><h2 class="recipe-title">Bombette Pugliesi di Martina Franca</h2><div class="recipe-meta"><span>⏱️ 30 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Capocollo di maiale a fette</span> <span><strong data-base="8">8</strong></span></li>
+                            <li><span>Caciocavallo</span> <span><strong data-base="150">150</strong> g</span></li>
+                            <li><span>Pancetta</span> <span><strong data-base="8">8</strong> fette</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Farcire le fettine di carne con caciocavallo, sale e pepe. Arrotolarle, avvolgerle nella pancetta e cuocere alla brace o in padella.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Primitivo DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="panzerotti fritti mozzarella pomodoro street food">
+                <div class="recipe-header"><div><h2 class="recipe-title">Panzerotti Fritti Pugliesi</h2><div class="recipe-meta"><span>⏱️ 120 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Farina 00</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Mozzarella asciutta</span> <span><strong data-base="300">300</strong> g</span></li>
+                            <li><span>Pomodoro denso</span> <span><strong data-base="200">200</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Preparare l'impasto per pizza. Formare dischetti, farcire con pomodoro e mozzarella, sigillare a mezzaluna e friggere in olio bollente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Birra fredda.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="parmigiana melanzane scamorza forno pugliese">
+                <div class="recipe-header"><div><h2 class="recipe-title">Parmigiana di Melanzane alla Pugliese</h2><div class="recipe-meta"><span>⏱️ 90 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Melanzane</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Passata di pomodoro</span> <span><strong data-base="700">700</strong> g</span></li>
+                            <li><span>Scamorza o fior di latte</span> <span><strong data-base="250">250</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Friggere le melanzane e alternarle in teglia con salsa, scamorza, parmigiano e basilico. Infornare a 190°C per 35 minuti.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Rosso di Barletta.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="pitta patate salento torta rustica cipolla">
+                <div class="recipe-header"><div><h2 class="recipe-title">Pitta di Patate Salentina</h2><div class="recipe-meta"><span>⏱️ 60 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Patate lesse</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Uova</span> <span><strong data-base="2">2</strong></span></li>
+                            <li><span>Cipolle stufate con olive</span> <span><strong data-base="300">300</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare patate, uova e formaggio. Foderare la teglia, farcire al centro con cipolle, capperi e olive, coprire, spolverare di pangrattato e infornare.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Chardonnay del Salento.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="calzone cipolla scarciopato foggia bari rustico">
+                <div class="recipe-header"><div><h2 class="recipe-title">Calzone di Cipolla</h2><div class="recipe-meta"><span>⏱️ 120 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Pasta per pane</span> <span><strong data-base="600">600</strong> g</span></li>
+                            <li><span>Cipolle</span> <span><strong data-base="1">1</strong> kg</span></li>
+                            <li><span>Acciughe e olive nere</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Stufare le cipolle con olio. Unire acciughe, olive, pecorino e un pizzico di uva passa. Farcire la sfoglia di pasta, chiudere e cuocere a 200°C.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Cerasuolo di Vittoria.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="polpette sugo carne macinata domenica pugliese">
+                <div class="recipe-header"><div><h2 class="recipe-title">Polpette al Sugo della Nonna</h2><div class="recipe-meta"><span>⏱️ 40 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Carne macinata mista</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Mollica di pane bagnata nel latte</span> <span><strong data-base="100">100</strong> g</span></li>
+                            <li><span>Passata di pomodoro</span> <span><strong data-base="700">700</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare carne, pane, uova e formaggio. Formare le polpette e cuocerle direttamente nella passata di pomodoro bollente per 25 minuti.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Primitivo di Manduria.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="piatti-unici" data-keywords="friselle pomodoro origano olio evo estate puglia">
+                <div class="recipe-header"><div><h2 class="recipe-title">Friselle Pugliesi con Pomodoro</h2><div class="recipe-meta"><span>⏱️ 10 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Rustici</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Friselle</span> <span><strong data-base="4">4</strong></span></li>
+                            <li><span>Pomodori maturi</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Olio extravergine d'oliva</span> <span><strong data-base="4">4</strong> cucchiai</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Bagnare rapidamente la frisella sotto l'acqua. Condire con pomodori a pezzi, olio evo generoso, origano e sale.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Rosato di Salento freddo.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- DOLCI TRADIZIONALI (10) -->
+            <div class="recipe-card" data-category="dolci" data-keywords="cartellate salentine vincotto dolci natale">
+                <div class="recipe-header"><div><h2 class="recipe-title">Cartellate Salentine con Vincotto</h2><div class="recipe-meta"><span>⏱️ 90 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Farina 00</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Vincotto di fichi o vino bianco</span> <span><strong data-base="150">150</strong> ml</span></li>
+                            <li><span>Olio evo</span> <span><strong data-base="50">50</strong> ml</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare farina, olio e vino. Stendere sottile, tagliare a strisce dentellate e formare le roselline cave. Friggerle e irrorarle con vincotto caldo.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Moscato di Trani DOC.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="pasticciotto leccese crema frolla dolce">
+                <div class="recipe-header"><div><h2 class="recipe-title">Pasticciotto Leccese</h2><div class="recipe-meta"><span>⏱️ 60 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Pasta frolla con strutto</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Crema pasticcera densa</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Tuorlo per spennellare</span> <span><strong data-base="1">1</strong></span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Foderare gli stampini ovali con la frolla, riempire con crema pasticcera fredda e chiudere con un coperchio di frolla. Spennellare d'uovo e infornare a 200°C.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Aleatico di Puglia liquoroso.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="bocconotti mandorla frolla dolce maglie puglia">
+                <div class="recipe-header"><div><h2 class="recipe-title">Bocconotti di Mandorla</h2><div class="recipe-meta"><span>⏱️ 50 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Pasta frolla</span> <span><strong data-base="300">300</strong> g</span></li>
+                            <li><span>Confettura di ciliegie o uva</span> <span><strong data-base="150">150</strong> g</span></li>
+                            <li><span>Mandorle tritate e cacao</span> <span><strong data-base="100">100</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Rivestire formine a barchetta con la frolla. Farcire con un impasto di confettura, mandorle e cacao. Coprire con disco di frolla e cuocere in forno.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Vino liquoroso dolce.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="zeppole san giuseppe crema amarena fritte forno">
+                <div class="recipe-header"><div><h2 class="recipe-title">Zeppole di San Giuseppe</h2><div class="recipe-meta"><span>⏱️ 60 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Pasta choux (acqua, burro, farina, uova)</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Crema pasticcera</span> <span><strong data-base="300">300</strong> g</span></li>
+                            <li><span>Amarene sciroppate</span> <span><strong data-base="8">8</strong></span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Formare delle ciambelle con la pasta choux. Friggerle in olio o cuocerle in forno. Decorare in superficie con crema pasticcera e un'amarena sciroppata.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Spumante dolce o Malvasia.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="mustazzoli mostaccioli salento cacao mandorle biscotti">
+                <div class="recipe-header"><div><h2 class="recipe-title">Mustazzoli (Mostaccioli Salentini)</h2><div class="recipe-meta"><span>⏱️ 40 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Farina 00</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Mandorle tostate</span> <span><strong data-base="150">150</strong> g</span></li>
+                            <li><span>Cacao amaro e Vincotto</span> <span><strong data-base="100">100</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare farina, mandorle, cacao, spezie (cannella e chiodi di garofano) e vincotto. Dare forma a rombi, cuocere in forno e glassare con cioccolato fondente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Rosolio o caffè con ghiaccio e latte di mandorla.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="taralli dolci glassa pasqua puglia">
+                <div class="recipe-header"><div><h2 class="recipe-title">Taralli Dolci alla Glassa (Pupateddr)</h2><div class="recipe-meta"><span>⏱️ 60 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Farina 00</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Zucchero e Uova</span> <span><strong data-base="3">3</strong></span></li>
+                            <li><span>Zucchero a velo e limone per glassa</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare farina, uova, zucchero e olio. Formare grandi taralli, cuocerli in forno e, una volta freddi, passarli in una densa glassa bianca di zucchero a velo e limone.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Vino bianco dolce.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="biscotti cegliesi mandorle confettura slow food">
+                <div class="recipe-header"><div><h2 class="recipe-title">Biscotti Cegliesi (Presidio Slow Food)</h2><div class="recipe-meta"><span>⏱️ 50 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Mandorle tostate tritate</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Zucchero e Uova</span> <span><strong data-base="2">2</strong></span></li>
+                            <li><span>Confettura di ciliegie o fichi</span> <span><strong data-base="150">150</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Impastare le mandorle con zucchero, uova e scorza di limone. Formare cubetti con un cuore di confettura all'interno, cuocere in forno e glassare con zucchero fondente.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Mandorlatto o rosolio di rose.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="paste di mandorla scurdati salento dolci">
+                <div class="recipe-header"><div><h2 class="recipe-title">Paste di Mandorla Tradizionali</h2><div class="recipe-meta"><span>⏱️ 30 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Farina di mandorle</span> <span><strong data-base="400">400</strong> g</span></li>
+                            <li><span>Zucchero a velo</span> <span><strong data-base="350">350</strong> g</span></li>
+                            <li><span>Albumi d'uovo</span> <span><strong data-base="3">3</strong></span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Lavorare la farina di mandorle con zucchero a velo e albumi non montati. Con la sac à poche formare le classiche S o riccioli, decorare con mezza ciliegia candita e infornare a 200°C per 8 minuti.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Passito di Pantelleria o Malvasia.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="spumone leccese gelato artigianale cioccolato">
+                <div class="recipe-header"><div><h2 class="recipe-title">Spumone Leccese</h2><div class="recipe-meta"><span>⏱️ 30 min</span><span>🔥 Facile</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Gelato al fior di latte e cioccolato</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Pan di spagna bagnato alcol</span> <span><strong data-base="100">100</strong> g</span></li>
+                            <li><span>Mandorle tritate e canditi</span> <span>q.b.</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">Foderare uno stampo semisferico con il gelato al cioccolato, inserire al centro il pan di spagna imbevuto, pezzetti di cioccolato, caramello e chiudere con gelato fior di latte. Abbattere di temperatura e servire a fette.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Liquore Amaro Salentino o Caffè.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-card" data-category="dolci" data-keywords="cartellate miele dolci puglia natale">
+                <div class="recipe-header"><div><h2 class="recipe-title">Cartellate al Miele Millefiori</h2><div class="recipe-meta"><span>⏱️ 90 min</span><span>🔥 Media</span></div></div><span class="recipe-category">Dolci</span></div>
+                <div class="recipe-body">
+                    <div>
+                        <div class="portion-control"><span data-i18n="lblPortions">Porzioni: <strong class="portion-count">4</strong></span><div class="portion-btns"><button type="button" class="p-btn" onclick="adjustPortions(this, -1)">-</button><button type="button" class="p-btn" onclick="adjustPortions(this, 1)">+</button></div></div>
+                        <div class="section-subtitle" data-i18n="lblIngredients">Ingredienti</div>
+                        <ul class="ingredients-list" data-base-portions="4">
+                            <li><span>Farina 00</span> <span><strong data-base="500">500</strong> g</span></li>
+                            <li><span>Olio evo e vino bianco</span> <span>q.b.</span></li>
+                            <li><span>Miele millefiori pugliese</span> <span><strong data-base="250">250</strong> g</span></li>
+                        </ul>
+                        <div class="section-subtitle" data-i18n="lblSteps">Procedimento</div>
+                        <p class="steps-box">La variante profumata delle classiche cartellate: dopo la frittura delle roselline di pasta sfoglia, invece del vincotto si scaldano con miele millefiori biologico e zuccherini colorati.</p>
+                    </div>
+                    <div>
+                        <div class="wine-pairing">🍷 <strong>Abbinamento:</strong> Moscato dolce.</div>
+                        <div class="card-actions"><button type="button" class="btn-card-action" onclick="copyRecipe(this)">📋 <span data-i18n="lblCopy">Copia</span></button><button type="button" class="btn-card-action" onclick="printRecipe(this)">🖨️ <span data-i18n="lblPrint">Stampa</span></button></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="floating-widgets">
+        <button type="button" class="btn-back-top" onclick="scrollToTop()" title="Torna su">⬆️ <span data-i18n="lblTop">Su</span></button>
+        <div class="zoom-widget">
+            <span style="font-size: 0.75rem;">A:</span>
+            <button type="button" class="zoom-btn" onclick="changeFontSize(-2)">-</button>
+            <button type="button" class="zoom-btn" onclick="changeFontSize(2)">+</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="guideModal">
+        <div class="modal">
+            <h2 data-i18n="mod_title">Guida all'Uso</h2>
+            <p data-i18n="mod_desc">Benvenuto nel ricettario digitale di Digital Creator Lab.</p>
+            <ul>
+                <li data-i18n="mod_l1">🌐 <strong>Multilingua:</strong> Scegli la tua lingua preferita in alto a destra.</li>
+                <li data-i18n="mod_l2">➕ <strong>Zoom e Porzioni:</strong> Ingrandisci i caratteri con i tasti in basso a destra o scala gli ingredienti.</li>
+                <li data-i18n="mod_l3">📋 <strong>Copia Ricetta:</strong> Copia subito il testo della ricetta negli appunti.</li>
+                <li data-i18n="mod_l4">🖨️ <strong>Stampa Intelligente:</strong> Stampa la singola ricetta con le porzioni aggiornate.</li>
+                <li data-i18n="mod_l5">⬆️ <strong>Pulsante Torna Su:</strong> Usa il tasto rapido in basso a destra per risalire.</li>
+            </ul>
+            <button type="button" class="btn-close" onclick="toggleModal(false)" data-i18n="mod_close">Chiudi</button>
+        </div>
+    </div>
+
+    <footer>
+        Creato con passione per <span>Digital Creator Lab</span> • Fatto a mano in Puglia per il Mondo 🌍
+    </footer>
+
+    <script>
+        const i18n = {
+            it: {
+                lblTitle: "Sapori di Puglia",
+                lblSubtitle: "Un viaggio digitale tra i profumi, i sapori e la tradizione della nostra terra.",
+                lblGuideBtn: "📖 Guida",
+                searchPlaceholder: "🔍 Cerca ricetta o ingrediente...",
+                lblTimerTitle: "⏱️ Timer Cottura:",
+                lblStart: "Avvia",
+                lblReset: "Reset",
+                lblScreenTitle: "💡 Schermo:",
+                lblWakeLock: "Tieni Acceso",
+                lblFilterAll: "Tutte",
+                lblFilterPrimi: "Primi Piatti (21)",
+                lblFilterRustici: "Rustici & Piatti Unici (11)",
+                lblFilterDolci: "Dolci Tradizionali (10)",
+                lblCounterText: "Visualizzazione di 42 ricette tradizionali",
+                lblPortions: "Porzioni: ",
+                lblIngredients: "Ingredienti",
+                lblSteps: "Procedimento",
+                lblCopy: "Copia",
+                lblPrint: "Stampa",
+                lblTop: "Su",
+                mod_title: "Guida all'Uso",
+                mod_desc: "Benvenuto nel ricettario digitale di Digital Creator Lab.",
+                mod_l1: "🌐 <strong>Multilingua:</strong> Scegli la tua lingua preferita in alto a destra.",
+                mod_l2: "➕ <strong>Zoom e Porzioni:</strong> Ingrandisci i caratteri o scala gli ingredienti.",
+                mod_l3: "📋 <strong>Copia:</strong> Copia la ricetta negli appunti.",
+                mod_l4: "🖨️ <strong>Stampa:</strong> Stampa la ricetta con le porzioni aggiornate.",
+                mod_l5: "⬆️ <strong>Torna Su:</strong> Risali rapidamente.",
+                mod_close: "Chiudi"
+            },
+            en: {
+                lblTitle: "Tastes of Apulia",
+                lblSubtitle: "A digital journey through the aromas, flavours and traditions of our land.",
+                lblGuideBtn: "📖 Guide",
+                searchPlaceholder: "🔍 Search a recipe or ingredient...",
+                lblTimerTitle: "⏱️ Cooking Timer:",
+                lblStart: "Start",
+                lblReset: "Reset",
+                lblScreenTitle: "💡 Screen:",
+                lblWakeLock: "Keep Awake",
+                lblFilterAll: "All",
+                lblFilterPrimi: "First Courses (21)",
+                lblFilterRustici: "Rustics & Mains (11)",
+                lblFilterDolci: "Traditional Sweets (10)",
+                lblCounterText: "Displaying 42 traditional recipes",
+                lblPortions: "Servings: ",
+                lblIngredients: "Ingredients",
+                lblSteps: "Instructions",
+                lblCopy: "Copy",
+                lblPrint: "Print",
+                lblTop: "Top",
+                mod_title: "User Guide",
+                mod_desc: "Welcome to Digital Creator Lab's digital cookbook.",
+                mod_l1: "🌐 <strong>Multilingual:</strong> Choose your language in the top right.",
+                mod_l2: "➕ <strong>Zoom & Portions:</strong> Zoom text or scale recipe ingredients.",
+                mod_l3: "📋 <strong>Copy:</strong> Copy the recipe to clipboard.",
+                mod_l4: "🖨️ <strong>Smart Print:</strong> Print with updated servings.",
+                mod_l5: "⬆️ <strong>Back to Top:</strong> Quick scroll button.",
+                mod_close: "Close"
+            },
+            fr: {
+                lblTitle: "Saveurs des Pouilles",
+                lblSubtitle: "Un voyage numérique à travers les arômes, les saveurs et les traditions de notre terre.",
+                lblGuideBtn: "📖 Guide",
+                searchPlaceholder: "🔍 Rechercher une recette...",
+                lblTimerTitle: "⏱️ Minuteur de cuisson:",
+                lblStart: "Démarrer",
+                lblReset: "Réinitialiser",
+                lblScreenTitle: "💡 Écran:",
+                lblWakeLock: "Veille",
+                lblFilterAll: "Toutes",
+                lblFilterPrimi: "Premiers Plats (21)",
+                lblFilterRustici: "Rustiques & Plats (11)",
+                lblFilterDolci: "Douceurs (10)",
+                lblCounterText: "Affichage de 42 recettes traditionnelles",
+                lblPortions: "Portions : ",
+                lblIngredients: "Ingrédients",
+                lblSteps: "Préparation",
+                lblCopy: "Copier",
+                lblPrint: "Imprimer",
+                lblTop: "Haut",
+                mod_title: "Guide d'Utilisation",
+                mod_desc: "Bienvenue dans le livre de recettes numérique de Digital Creator Lab.",
+                mod_l1: "🌐 <strong>Multilingue:</strong> Choisissez votre langue en haut à droite.",
+                mod_l2: "➕ <strong>Zoom & Portions:</strong> Ajustez la taille du texte ou les portions.",
+                mod_l3: "📋 <strong>Copier:</strong> Copiez la recette.",
+                mod_l4: "🖨️ <strong>Impression:</strong> Imprimez avec les portions ajustées.",
+                mod_l5: "⬆️ <strong>Haut de page:</strong> Bouton de retour rapide.",
+                mod_close: "Fermer"
+            },
+            de: {
+                lblTitle: "Aromen Apuliens",
+                lblSubtitle: "Eine digitale Reise durch die Düfte, Aromen und Traditionen unserer Heimat.",
+                lblGuideBtn: "📖 Anleitung",
+                searchPlaceholder: "🔍 Rezept oder Zutat suchen...",
+                lblTimerTitle: "⏱️ Koch-Timer:",
+                lblStart: "Starten",
+                lblReset: "Zurück",
+                lblScreenTitle: "💡 Bildschirm:",
+                lblWakeLock: "Anlassen",
+                lblFilterAll: "Alle",
+                lblFilterPrimi: "Erste Gänge (21)",
+                lblFilterRustici: "Rustikal & Hauptgerichte (11)",
+                lblFilterDolci: "Süßspeisen (10)",
+                lblCounterText: "Es werden 42 traditionelle Rezepte angezeigt",
+                lblPortions: "Portionen: ",
+                lblIngredients: "Zutaten",
+                lblSteps: "Zubereitung",
+                lblCopy: "Kopieren",
+                lblPrint: "Drucken",
+                lblTop: "Oben",
+                mod_title: "Benutzerhandbuch",
+                mod_desc: "Willkommen beim digitalen Kochbuch von Digital Creator Lab.",
+                mod_l1: "🌐 <strong>Mehrsprachig:</strong> Sprache oben rechts auswählen.",
+                mod_l2: "➕ <strong>Zoom & Portionen:</strong> Textgröße anpassen oder Zutaten skalieren.",
+                mod_l3: "📋 <strong>Kopieren:</strong> Rezept in die Zwischenablage kopieren.",
+                mod_l4: "🖨️ <strong>Drucken:</strong> Mit angepassten Portionen drucken.",
+                mod_l5: "⬆️ <strong>Nach oben:</strong> Schneller Scroll-Button.",
+                mod_close: "Schließen"
+            },
+            es: {
+                lblTitle: "Sabores de Apulia",
+                lblSubtitle: "Un viaje digital a través de los aromas, sabores y tradiciones de nuestra tierra.",
+                lblGuideBtn: "📖 Guía",
+                searchPlaceholder: "🔍 Buscar receta o ingrediente...",
+                lblTimerTitle: "⏱️ Temporizador:",
+                lblStart: "Iniciar",
+                lblReset: "Reiniciar",
+                lblScreenTitle: "💡 Pantalla:",
+                lblWakeLock: "Mantener",
+                lblFilterAll: "Todas",
+                lblFilterPrimi: "Primeros Platos (21)",
+                lblFilterRustici: "Rústicos y Principales (11)",
+                lblFilterDolci: "Postres (10)",
+                lblCounterText: "Mostrando 42 recetas tradicionales",
+                lblPortions: "Porciones: ",
+                lblIngredients: "Ingredientes",
+                lblSteps: "Preparación",
+                lblCopy: "Copiar",
+                lblPrint: "Imprimir",
+                lblTop: "Arriba",
+                mod_title: "Guía de Uso",
+                mod_desc: "Bienvenido al recetario digital de Digital Creator Lab.",
+                mod_l1: "🌐 <strong>Multilingüe:</strong> Elige tu idioma arriba a la derecha.",
+                mod_l2: "➕ <strong>Zoom y Porciones:</strong> Amplía el texto o escala las porciones.",
+                mod_l3: "📋 <strong>Copiar:</strong> Copia la receta al portapapeles.",
+                mod_l4: "🖨️ <strong>Imprimir:</strong> Imprime con las porciones actualizadas.",
+                mod_l5: "⬆️ <strong>Arriba:</strong> Botón de desplazamiento rápido.",
+                mod_close: "Cerrar"
+            },
+            cn: {
+                lblTitle: "普利亚风味美食",
+                lblSubtitle: "一段穿越我们这片土地香气、风味与传统的数字之旅。",
+                lblGuideBtn: "📖 使用指南",
+                searchPlaceholder: "🔍 搜索食谱或食材...",
+                lblTimerTitle: "⏱️ 烹饪计时器:",
+                lblStart: "开始",
+                lblReset: "重置",
+                lblScreenTitle: "💡 屏幕:",
+                lblWakeLock: "保持常亮",
+                lblFilterAll: "全部",
+                lblFilterPrimi: "面食/头盘 (21)",
+                lblFilterRustici: "特色咸点 (11)",
+                lblFilterDolci: "传统甜点 (10)",
+                lblCounterText: "显示 42 道传统食谱",
+                lblPortions: "份量: ",
+                lblIngredients: "食材",
+                lblSteps: "制作步骤",
+                lblCopy: "复制",
+                lblPrint: "打印",
+                lblTop: "顶部",
+                mod_title: "使用指南",
+                mod_desc: "欢迎来到 Digital Creator Lab 数字食谱实验室。",
+                mod_l1: "🌐 <strong>多语言支持:</strong> 在右上角选择您喜欢的语言。",
+                mod_l2: "➕ <strong>缩放与份量:</strong> 放大字体或动态调整食谱份量。",
+                mod_l3: "📋 <strong>复制食谱:</strong> 一键复制食谱文本。",
+                mod_l4: "🖨️ <strong>智能打印:</strong> 打印更新份量后的食谱。",
+                mod_l5: "⬆️ <strong>返回顶部:</strong> 快速返回页面顶部。",
+                mod_close: "关闭"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const dict = i18n[lang] || i18n['it'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
+            document.getElementById('searchInput').placeholder = dict.searchPlaceholder;
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let currentFontSize = 16;
+        function changeFontSize(amount) {
+            currentFontSize += amount;
+            if (currentFontSize < 12) currentFontSize = 12;
+            if (currentFontSize > 24) currentFontSize = 24;
+            document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+        }
+
+        function adjustPortions(btn, change) {
+            const card = btn.closest('.recipe-card');
+            const countSpan = card.querySelector('.portion-count');
+            let currentPortions = parseInt(countSpan.textContent) + change;
+            if (currentPortions < 1) currentPortions = 1;
+            if (currentPortions > 20) currentPortions = 20;
+            countSpan.textContent = currentPortions;
+
+            const basePortions = parseInt(card.querySelector('.ingredients-list').dataset.basePortions);
+            const multiplier = currentPortions / basePortions;
+
+            card.querySelectorAll('.ingredients-list li span:last-child strong').forEach(el => {
+                const baseVal = parseFloat(el.dataset.base);
+                if (!isNaN(baseVal)) {
+                    let newVal = baseVal * multiplier;
+                    el.textContent = newVal % 1 !== 0 ? newVal.toFixed(1) : newVal;
+                }
+            });
+        }
+
+        function updateResultsCounter() {
+            const visibleCards = document.querySelectorAll('.recipe-card[style*="display: flex"], .recipe-card:not([style*="display: none"])');
+            const counterEl = document.getElementById('resultsCounter');
+            const lang = document.getElementById('langSelect').value;
+            const dict = i18n[lang] || i18n['it'];
+            counterEl.textContent = `${dict.lblCounterText.split('42')[0]}${visibleCards.length}${dict.lblCounterText.split('42')[1] || ' traditional recipes'}`;
+        }
+
+        function filterRecipes(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            updateResultsCounter();
+        }
+
+        function searchRecipes() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                const title = card.querySelector('.recipe-title').textContent.toLowerCase();
+                const keywords = card.getAttribute('data-keywords') ? card.getAttribute('data-keywords').toLowerCase() : '';
+                if (title.includes(query) || keywords.includes(query) || query === '') {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            updateResultsCounter();
+        }
+
+        function copyRecipe(btn) {
+            const card = btn.closest('.recipe-card');
+            const title = card.querySelector('.recipe-title').textContent;
+            const portions = card.querySelector('.portion-count').textContent;
+            let text = `*${title}* (Porzioni: ${portions})\n\n-- INGREDIENTI --\n`;
+            
+            card.querySelectorAll('.ingredients-list li').forEach(li => {
+                const spans = li.querySelectorAll('span');
+                text += `- ${spans[0].textContent}: ${spans[1].textContent}\n`;
+            });
+
+            const steps = card.querySelector('.steps-box').textContent;
+            text += `\n-- PROCEDIMENTO --\n${steps}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('📋 Ricetta copiata negli appunti!');
+            }).catch(err => {
+                console.error('Errore', err);
+            });
+        }
+
+        let timerInterval;
+        let timeLeft = 600;
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    let mins = Math.floor(timeLeft / 60);
+                    let secs = timeLeft % 60;
+                    document.getElementById('timerDisplay').textContent = 
+                        (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+                } else {
+                    clearInterval(timerInterval);
+                    alert('⏰ Tempo scaduto!');
+                }
+            }, 1000);
+        }
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 600;
+            document.getElementById('timerDisplay').textContent = '10:00';
+        }
+
+        async function toggleWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    await navigator.wakeLock.request('screen');
+                    alert('💡 Schermo bloccato sempre acceso!');
+                } else {
+                    alert('Funzione non supportata dal browser.');
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        function toggleModal(show) {
+            const modal = document.getElementById('guideModal');
+            if (show) modal.classList.add('active');
+            else modal.classList.remove('active');
+        }
+
+        function printRecipe(btn) {
+            const card = btn.closest('.recipe-card');
+            const title = card.querySelector('.recipe-title').innerHTML;
+            const meta = card.querySelector('.recipe-meta').innerHTML;
+            const portions = card.querySelector('.portion-count').textContent;
+            const ingredientsHTML = card.querySelector('.ingredients-list').innerHTML;
+            const steps = card.querySelector('.steps-box').innerHTML;
+            const wine = card.querySelector('.wine-pairing') ? card.querySelector('.wine-pairing').innerHTML : '';
+
+            const printWindow = window.open('', '', 'height=700,width=800');
+            printWindow.document.write('<html><head><title>Stampa Ricetta - Digital Creator Lab</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write('body { font-family: Arial, sans-serif; padding: 30px; color: #2b2b2b; line-height: 1.6; }');
+            printWindow.document.write('h1 { color: #2d4a3e; font-size: 24px; margin-bottom: 5px; }');
+            printWindow.document.write('.meta { font-size: 14px; color: #666; margin-bottom: 20px; display: flex; gap: 20px; }');
+            printWindow.document.write('.subtitle { font-size: 15px; font-weight: bold; text-transform: uppercase; margin-top: 20px; margin-bottom: 8px; color: #2d4a3e; border-bottom: 2px solid #2d4a3e; padding-bottom: 3px; }');
+            printWindow.document.write('ul { list-style: none; padding: 0; margin-bottom: 20px; }');
+            printWindow.document.write('li { padding: 6px 0; border-bottom: 1px dashed #ccc; display: flex; justify-content: space-between; font-size: 15px; }');
+            printWindow.document.write('p { font-size: 15px; margin-bottom: 20px; }');
+            printWindow.document.write('.wine { background: #f4f6f5; padding: 12px; border-left: 4px solid #2d4a3e; font-size: 14px; margin-top: 20px; }');
+            printWindow.document.write('.footer { margin-top: 40px; text-align: center; font-size: 12px; color: #888; border-top: 1px solid #ddd; padding-top: 10px; }');
+            printWindow.document.write('</style></head><body>');
+            
+            printWindow.document.write('<h1>' + title + '</h1>');
+            printWindow.document.write('<div class="meta">' + meta + ' <span><strong>Porzioni: ' + portions + '</strong></span></div>');
+            printWindow.document.write('<div class="subtitle">Ingredienti</div>');
+            printWindow.document.write('<ul>' + ingredientsHTML + '</ul>');
+            printWindow.document.write('<div class="subtitle">Procedimento</div>');
+            printWindow.document.write('<p>' + steps + '</p>');
+            if (wine) printWindow.document.write('<div class="wine">' + wine + '</div>');
+            printWindow.document.write('<div class="footer">Digital Creator Lab • Sapori di Puglia</div>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
+        }
+    </script>
+</body>
+</html>
